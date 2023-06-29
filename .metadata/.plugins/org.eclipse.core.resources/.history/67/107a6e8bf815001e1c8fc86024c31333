@@ -1,0 +1,33 @@
+package orm.actions;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import orm.modelo.Aluno;
+
+public class BuscarAluno {
+
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("alunos");
+		EntityManager manager = factory.createEntityManager();
+		
+		String sql = "SELECT t FROM Aluno AS t";
+
+		Query query = manager.createQuery(sql);
+		
+		query.setParameter("paramFinalizacao", true);
+		
+		@SuppressWarnings("unchecked")
+		List<Aluno> lista = query.getResultList();
+		
+		for (Aluno a : lista) {
+			System.out.println(a.getNome());
+		}
+
+	}
+
+}

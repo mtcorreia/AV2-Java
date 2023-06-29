@@ -1,0 +1,35 @@
+package orm.actions;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import orm.modelo.Aluno;
+
+public class BuscarPorLetraAluno {
+
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("alunos");
+        EntityManager manager = factory.createEntityManager();
+
+        String letra = "M";
+
+        String sql = "SELECT a FROM Aluno AS a WHERE a.nome LIKE =:letra%";
+        Query query = manager.createQuery(sql);
+        query.setParameter("letra", letra);
+
+        @SuppressWarnings("unchecked")
+        List<Aluno> listaNomes = query.getResultList();
+
+        for (Aluno aluno : listaNomes) {
+            System.out.println(aluno.getNome());
+        }
+
+        manager.close();
+        factory.close();
+	}
+
+}

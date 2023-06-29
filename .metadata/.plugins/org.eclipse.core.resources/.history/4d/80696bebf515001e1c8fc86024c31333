@@ -1,0 +1,5 @@
+package orm.ddl;
+
+public class TabelaAluno {
+
+}

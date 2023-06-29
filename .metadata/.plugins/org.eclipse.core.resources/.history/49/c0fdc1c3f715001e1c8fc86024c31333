@@ -1,0 +1,46 @@
+package orm.actions;
+
+import java.util.Calendar;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import orm.modelo.Aluno;
+
+public class InserirAluno {
+
+	public static void main(String[] args) {
+//		Tarefa tarefa1 = new Tarefa();
+//		
+//		tarefa1.setDescricao("Estudar Java");
+//		tarefa1.setFinalizacao(true);
+//		tarefa1.setDataFinalizacao(Calendar.getInstance());
+		
+//		Tarefa tarefa2 = new Tarefa();
+//		tarefa2.setDescricao("Fazer o café da manhã");
+//		tarefa2.setFinalizacao(true);
+//		tarefa2.setDataFinalizacao(Calendar.getInstance());
+		
+		Tarefa tarefa3 = new Tarefa();
+		tarefa3.setDescricao("Dormir");
+		tarefa3.setFinalizacao(false);
+		tarefa3.setDataFinalizacao(Calendar.getInstance());
+		
+		
+		// Factory para DDL.
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("tarefas");
+		
+		// Para operar na base: manager.
+		EntityManager manager = factory.createEntityManager();
+		
+		manager.getTransaction().begin();
+		manager.persist(tarefa3);
+		manager.getTransaction().commit();
+		System.out.println("Tarefa inserida, ID: " + tarefa3.getId());
+		
+		manager.close();
+		factory.close();
+	}
+	
+}

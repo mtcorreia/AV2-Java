@@ -1,0 +1,29 @@
+package orm.actions;
+
+import java.util.List;
+import java.util.Scanner;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import orm.modelo.Aluno;
+
+public class BuscarAlunoLetra {
+
+	public static void main(String[] args) {
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("alunos");
+		EntityManager manager = factory.createEntityManager();
+	
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Letra Inicial do Nome (para busca): ");
+		String letraInicial = sc.nextLine();
+		
+		Aluno t = manager.find(Aluno.class, letraInicial);
+		System.out.println(t.getNome());
+		
+		manager.close();
+    }
+
+}
